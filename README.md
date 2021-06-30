@@ -14,8 +14,8 @@ This `calculate` endpoint receives as input for the calculation an object with t
 - `value` the start value for the calculation
 
 Remarks
-- An individual calculation can take just few milli-seconds or several minutes for other inputs
-- the service is thread safe
+- An individual calculation can take just few milli-seconds or up to several seconds
+- the service can process multiple concurrent requests
 - the calculation is not necessarily deterministic, the same input can lead to different results at different times
 - it is not important for this assignment to understand the internal logic of the calculator, it just returns values
 - for this assignment you can for now assume that the service is reliable and does not throw any exceptions
