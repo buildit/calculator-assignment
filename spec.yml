@@ -6,7 +6,7 @@ servers:
   - url: 'http://localhost:8080'
     description: Generated server url
 paths:
-  '/context/{ctx}/calculate':
+  '/context/{date}/calculate':
     post:
       tags:
         - controller
@@ -14,11 +14,12 @@ paths:
       description: This operation should just trigger the calculation and not wait for the result
       operationId: calculate
       parameters:
-        - name: ctx
+        - name: date
           in: path
           required: true
           schema:
             type: string
+            format: date
       requestBody:
         content:
           application/json:
@@ -33,19 +34,20 @@ paths:
           description: calculation request received
         '400':
           description: execution against a closed context
-  '/context/{ctx}/close':
-    get:
+  '/context/{date}/close':
+    post:
       tags:
         - controller
       summary: closes a context
       description: All previously triggered calculations for this context need to be included in the result
       operationId: close
       parameters:
-        - name: ctx
+        - name: date
           in: path
           required: true
           schema:
             type: string
+            format: date
       responses:
         '200':
           description: success
@@ -60,18 +62,19 @@ paths:
           description: execution against a closed context
         '404':
           description: context not found
-  '/context/{ctx}':
+  '/context/{date}':
     delete:
       tags:
         - controller
       summary: deletes a context
       operationId: delete
       parameters:
-        - name: ctx
+        - name: date
           in: path
           required: true
           schema:
             type: string
+            format: date
       responses:
         '200':
           description: successful deletion
