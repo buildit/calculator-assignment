@@ -1,0 +1,98 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: 'http://localhost:8080'
+    description: Generated server url
+paths:
+  '/context/{ctx}/calculate':
+    post:
+      tags:
+        - controller
+      summary: triggers a calculation
+      description: This operation should just trigger the calculation and not wait for the result
+      operationId: calculate
+      parameters:
+        - name: ctx
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Input'
+            example:
+              category: "beta-build"
+              value: 7762
+        required: true
+      responses:
+        '200':
+          description: calculation request received
+        '400':
+          description: execution against a closed context
+  '/context/{ctx}/close':
+    get:
+      tags:
+        - controller
+      summary: closes a context
+      description: All previously triggered calculations for this context need to be included in the result
+      operationId: close
+      parameters:
+        - name: ctx
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContextStatus'
+              example:
+                sum: 232399
+                count: 48
+        '400':
+          description: execution against a closed context
+        '404':
+          description: context not found
+  '/context/{ctx}':
+    delete:
+      tags:
+        - controller
+      summary: deletes a context
+      operationId: delete
+      parameters:
+        - name: ctx
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful deletion
+        '404':
+          description: context not found
+components:
+  schemas:
+    Input:
+      type: object
+      properties:
+        category:
+          type: string
+        value:
+          type: integer
+          format: int64
+    ContextStatus:
+      type: object
+      properties:
+        sum:
+          type: integer
+          format: int64
+        count:
+          type: integer
+          format: int32
