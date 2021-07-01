@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
+  title: Daily Calculator Service
   version: v0
 servers:
   - url: 'http://localhost:8080'
@@ -9,7 +9,7 @@ paths:
   '/context/{date}/calculate':
     post:
       tags:
-        - controller
+        - DailyCalculatorService
       summary: triggers a calculation
       description: This operation should just trigger the calculation and not wait for the result
       operationId: calculate
@@ -37,7 +37,7 @@ paths:
   '/context/{date}/close':
     post:
       tags:
-        - controller
+        - DailyCalculatorService
       summary: closes a context
       description: All previously triggered calculations for this context need to be included in the result
       operationId: close
@@ -65,7 +65,7 @@ paths:
   '/context/{date}':
     delete:
       tags:
-        - controller
+        - DailyCalculatorService
       summary: deletes a context
       operationId: delete
       parameters:

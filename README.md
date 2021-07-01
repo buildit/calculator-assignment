@@ -34,7 +34,13 @@ And a sample response:
   "index": 860214
 }
 ```
-The `index` is the calculated value needed.
+The `index` is the calculated result we are interested in.
+
+### swagger 3 (openapi)
+There openapi UI is available as well:
+
+- [the UI](http://localhost:8888/swagger-ui.html)
+- [the spec](http://localhost:8888/v3/api-docs)
 
 ### Remarks
 - An individual calculation can take just few milli-seconds or up to several seconds
@@ -44,10 +50,11 @@ The `index` is the calculated value needed.
 - for this assignment you can for now assume that the service is reliable and does not throw any exceptions
 
 
-## Calculator Manager Service
+## Daily Calculator Service
 This service needs to be implemented by you. It will use the above Calculator Service but adds the concept of a daily context to it:
 Calculation requests are always executed against a given date.
-At end of day a close request can be called which returns the aggregated totals for the given day.
+At end of day a `close` request can be invoked which returns the aggregated totals for the given day.
+A closed context should not accept further calculation requests.
 
 The process is as follows:
 
@@ -68,15 +75,11 @@ This endpoint should return:
 The returned values here needs to take all calculations into account which where triggered before the `close` endpoint was called:
 any still running calculations must complete before the close result can be delivered.
 
-### 4) optional deletion
-A context can be deleted
-
-
 ### the endpoints
 
 All date formats are `yyyy-MM-dd`
 
-#### calculate
+#### calculate endpoint
 
 Sample input for a `POST`:
 ```json
@@ -88,9 +91,9 @@ Sample input for a `POST`:
 There is no response body as the service should return right away.
 
 
-#### close
+#### close endpoint
 
-The close endpoint returns the daily totals for the given context:
+The `close` endpoint returns the daily totals for the given context:
 
 ```json
 {
@@ -103,6 +106,11 @@ with
 - `sum` the sum of all calculations of the given context
 - `count` the number of calls against the given context
 
+
+#### delete endpoint
+A context can be deleted and even recreated if needed.
+On recreation, it should start from scratch i.e., any previous values should be discarded.
+
 ### Further service requirements
 
 - A closed context cannot be closed again
@@ -111,8 +119,9 @@ with
 
 See also the spec for the expected http status codes, payloads and other requirements.
 
-## Implementation requirements
-todo
+## Assignment requirements
+You should provide a readme including your design decisions and instructions how to start the service.
+The implementation should follow good practices.
 
 
 ## Files summary
