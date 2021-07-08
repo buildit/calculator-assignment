@@ -10,6 +10,12 @@ Your service will use the calculator and will aggregate results per day.
 
 ## Calculator Service
 This service is provided to you via a docker image. It has only one endpoint which is described [here](calculator-service.yml).
+
+The docker image is pubically available on Docker Hub as `gillius/buildit-calculator-service`. The service runs on port 8080 internally, but it should be exposed on the host as port 8888 to be consistent with the graded environment (`-p 8888:8080`). If you are running the service correctly, the following links should work:
+
+- UI: http://localhost:8888/swagger-ui.html
+- OpenAPI spec: http://localhost:8888/v3/api-docs
+
 This `calculate` endpoint receives as input for the calculation an object with two properties:
 - `category` which indicates how the calculator needs to process
 - `value` the start value for the calculation
