@@ -16,13 +16,13 @@ The docker image is pubically available on Docker Hub as `gillius/buildit-calcul
 - UI: http://localhost:8888/swagger-ui.html
 - OpenAPI spec: http://localhost:8888/v3/api-docs
 
+### the calculate endpoint
+
 This `calculate` endpoint receives as input for the calculation an object with two properties:
 - `category` which indicates how the calculator needs to process
 - `value` the start value for the calculation
 
 The services then calculates an `index` for the given input which is the value we are interested in.
-
-### the calculate endpoint
 
 Here a sample request:
 ```json
@@ -41,12 +41,6 @@ And a sample response:
 }
 ```
 The `index` is the calculated result we are interested in.
-
-### swagger 3 (openapi)
-There openapi UI is available as well:
-
-- [the UI](http://localhost:8888/swagger-ui.html)
-- [the spec](http://localhost:8888/v3/api-docs)
 
 ### Remarks
 - An individual calculation can take just few milli-seconds or up to several seconds
