@@ -7,6 +7,7 @@ The service allows a client to execute calculations.
 Your service will not need to implement the calculation itself, for this a calculator service is provided via a docker image.
 Your service will use the calculator and will aggregate results per day.
 
+Please host your completed example at a publically available git URL -- you can use a public GitHub repository for this.
 
 ## Calculator Service
 This service is provided to you via a docker image. It has only one endpoint which is described [here](calculator-service.yml).
@@ -121,6 +122,7 @@ See also the spec for the expected http status codes, payloads and other require
 
 ## Assignment requirements
 You should provide a readme including your design decisions and instructions how to start the service.
+For Java-based projects, you can assume the evaluator has JDK installed. JDK 11 is preferred but latest JDK is allowed. Maven wrapper (`mvnw`) or Gradle wrapper (`gradlew`) are the allowed build systems for Java-based projects.
 The implementation should follow good practices.
 
 
